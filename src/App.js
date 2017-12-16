@@ -13,11 +13,7 @@ class App extends Component {
             <h1 className={styles.AppTitle}>Welcome to React</h1>
           </header>
           <div className={styles.AppIntro}>
-            <Weather/>
-            <Weather/>
-            <Weather/>
-            <Weather/>
-            <Weather/>
+            <Weather cityId={524901}/>
             <Weather/>
           </div>
         </div>

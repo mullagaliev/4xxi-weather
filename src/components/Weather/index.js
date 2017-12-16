@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Clock from 'react-live-clock';
-
+import WeatherApi from '../../services/WeatherApi';
 const styles = require('./Weather.sass');
+const weatherApi = new WeatherApi({ appid: process.env.REACT_APP_OPEN_WEATHER_SECRET });
+
 
 class Weather extends Component {
-  componentWillMount(){
-    console.log('ready');
+  componentWillMount() {
+    const { cityId } = this.props;
+    weatherApi.getCurrentByCityId(cityId);
   }
+
   render() {
     return (<div className={styles.Weather} weather-index="1">
       <div className={styles.WeatherLeftCol}>
@@ -24,7 +28,7 @@ class Weather extends Component {
         </div>
         <div className={styles.WeatherAttr}>
           <div className={styles.WeatherTime}>
-            <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'} />
+            <Clock format={'HH:mm:ss'} ticking={true} timezone={'US/Pacific'}/>
           </div>
         </div>
       </div>
