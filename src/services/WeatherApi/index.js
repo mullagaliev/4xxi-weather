@@ -5,26 +5,30 @@ const defaultSettings = {
   appid: null,
   protocol: 'http',
   version: '2.5',
-  format: 'json'
+  format: 'json',
+  units: 'metric'
 };
 
 class WeatherApi {
   constructor(customSettings = {}) {
     const settings = Object.assign(defaultSettings, customSettings);
-    const { appid } = settings;
+    const { appid, units } = settings;
     const { protocol = 'http', version = '2.5', format = 'json' } = settings;
     const SITE = 'api.openweathermap.org/data';
 
     this.appid = appid;
     this.rootUrl = `${protocol}://${SITE}/${version}`;
     this.format = format;
+    this.units = units;
     return this;
   }
 
   _formatParams(params) {
     return Object.assign(params, {
       appid: this.appid,
-      format: this.format
+      format: this.format,
+      units: this.units,
+      lang: 'ru'
     });
   }
 
@@ -43,7 +47,7 @@ class WeatherApi {
             throw { code: response.statusCode, err: 'Status error' };
           }
           if (response.body.cod === 200) {
-            return camelizeKeys(response.body.result);
+            return camelizeKeys(response.body);
           }
           else {
             throw { code: response.body.cod, err: response.body };
