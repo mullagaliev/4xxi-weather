@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Weather from './components/Weather';
+import WeatherCard from './components/WeatherCard';
 
 const styles = require('./App.sass');
 
@@ -13,8 +13,11 @@ class App extends Component {
             <h1 className={styles.AppTitle}>Welcome to React</h1>
           </header>
           <div className={styles.AppIntro}>
-            <Weather cityId={524901}/>
-            <Weather/>
+            <div className="WeatherCardList">
+              <WeatherCard cityId={524901}/>
+              <WeatherCard cityId={498817}/>
+              <WeatherCard cityId={1488754}/>
+            </div>
           </div>
         </div>
     );
